@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIRCH SOUND - Next Generation Live Entertainment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+/* ====== RESET & BASE ====== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  background: #0A0A0A;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+::selection { background: #4F46E5; color: #fff; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; }
+img { display: block; max-width: 100%; }
+input, textarea { font-family: inherit; }
+
+/* ====== UTILITIES ====== */
+.font-mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace; }
+.glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); }
+.text-gradient { background: linear-gradient(to right, #4F46E5, #9333EA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.grid-pattern { background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0); background-size: 40px 40px; }
+.grayscale { filter: grayscale(100%); }
+.grayscale-hover:hover { filter: grayscale(0%); transition: filter 0.7s; }
+
+/* ====== SCROLLBAR ====== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+/* ====== ANIMATIONS ====== */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+.anim-up { animation: fadeInUp 0.8s ease both; }
+.anim-left { animation: fadeInLeft 0.8s ease both; }
+.anim-fade { animation: fadeIn 0.6s ease both; }
+.anim-scale { animation: scaleIn 0.5s ease both; }
+.anim-delay-1 { animation-delay: 0.1s; }
+.anim-delay-2 { animation-delay: 0.2s; }
+.anim-delay-3 { animation-delay: 0.3s; }
+
+/* ====== NAVIGATION ====== */
+.nav {
+  position: fixed; top: 0; width: 100%; z-index: 50;
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.nav-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 24px;
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo img { height: 32px; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.6);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: #fff; }
+.nav-links a.highlight { color: #4F46E5; font-weight: 700; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.lang-btn {
+  display: flex; align-items: center; gap: 8px;
+  font-family: "JetBrains Mono", monospace; font-size: 10px;
+  color: rgba(255,255,255,0.4); background: none; border: none;
+  text-transform: uppercase; letter-spacing: 0.15em; transition: color 0.2s;
+}
+.lang-btn:hover { color: #fff; }
+.lang-btn svg { width: 12px; height: 12px; }
+.contact-btn {
+  padding: 8px 16px; background: #fff; color: #000;
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.15em; border: none; transition: all 0.2s;
+}
+.contact-btn:hover { background: #4F46E5; color: #fff; }
+
+/* ====== BADGE ====== */
+.badge {
+  display: inline-block; padding: 4px 12px;
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em;
+  font-family: "JetBrains Mono", monospace;
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 999px;
+  color: rgba(255,255,255,0.6); margin-bottom: 16px;
+}
+
+/* ====== SECTIONS ====== */
+.section {
+  padding: 96px 24px; max-width: 1280px; margin: 0 auto;
+}
+.section-border { border-top: 1px solid rgba(255,255,255,0.05); }
+.section-bg { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+/* ====== HERO ====== */
+.hero {
+  position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; filter: grayscale(100%); }
+.hero-gradient {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(10,10,10,0.5) 50%, #0A0A0A);
+}
+.hero-content {
+  position: relative; z-index: 10; text-align: center; padding: 0 24px; max-width: 896px;
+}
+.hero-content .hero-logo { height: 128px; margin: 0 auto 32px; }
+.hero-content h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700;
+  letter-spacing: -0.05em; line-height: 0.9; margin-bottom: 24px; text-transform: uppercase;
+}
+.hero-content p {
+  font-size: clamp(1rem, 2vw, 1.25rem); color: rgba(255,255,255,0.6);
+  max-width: 672px; margin: 0 auto; font-weight: 300; line-height: 1.7;
+}
+
+/* ====== NORY CITY ====== */
+.norycity { position: relative; overflow: hidden; }
+.norycity-bg {
+  position: absolute; inset: 0; background: #050B1A; z-index: -1;
+}
+.norycity-bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.2; }
+.norycity .section { position: relative; z-index: 1; }
+.norycity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.norycity-title { font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 700; letter-spacing: -0.05em; margin-bottom: 16px; }
+.norycity-catchphrase { font-family: "JetBrains Mono", monospace; font-size: 1.25rem; color: rgba(147,197,253,0.8); margin-bottom: 24px; font-style: italic; }
+.norycity-def { color: rgba(255,255,255,0.7); font-size: 1.125rem; margin-bottom: 32px; line-height: 1.7; }
+.norycity-btns { display: flex; flex-wrap: wrap; gap: 16px; }
+.btn-blue {
+  padding: 16px 32px; background: #2563EB; color: #fff;
+  font-weight: 700; font-size: 12px; text-transform: uppercase;
+  letter-spacing: 0.15em; border-radius: 999px; border: none;
+  display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s;
+}
+.btn-blue:hover { background: #3B82F6; }
+.btn-outline {
+  padding: 16px 32px; background: transparent; color: #fff;
+  font-weight: 700; font-size: 12px; text-transform: uppercase;
+  letter-spacing: 0.15em; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.1); }
+.norycity-images { position: relative; }
+.norycity-images .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.norycity-images .col { display: flex; flex-direction: column; gap: 16px; }
+.norycity-images .col:last-child { padding-top: 48px; }
+.nory-img {
+  border-radius: 16px; overflow: hidden;
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.nory-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+.nory-img.tall { aspect-ratio: 3/4; }
+.nory-img.sq { aspect-ratio: 1/1; }
+.norycity-glow {
+  position: absolute; inset: -16px; z-index: -1;
+  background: linear-gradient(to top right, rgba(59,130,246,0.2), rgba(168,85,247,0.2), rgba(236,72,153,0.2));
+  filter: blur(48px);
+}
+
+/* ====== ABOUT ====== */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.about-grid h2 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.05em; margin-bottom: 24px; }
+.about-grid p.desc { color: rgba(255,255,255,0.6); margin-bottom: 32px; line-height: 1.7; }
+.vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.vm-grid h4 {
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px;
+}
+.vm-grid h4.vision { color: #4F46E5; }
+.vm-grid h4.mission { color: #9333EA; }
+.vm-grid p { font-size: 14px; color: rgba(255,255,255,0.8); }
+.about-image { position: relative; aspect-ratio: 1; }
+.about-image img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 16px;
+  filter: grayscale(100%); transition: filter 0.7s;
+}
+.about-image:hover img { filter: grayscale(0%); }
+
+/* ====== BUSINESS ====== */
+.biz-header { text-align: center; margin-bottom: 64px; }
+.biz-header h2 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 700; letter-spacing: -0.05em; }
+.biz-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.biz-card {
+  background: #0A0A0A; padding: 40px; transition: background 0.2s;
+}
+.biz-card:hover { background: rgba(255,255,255,0.03); }
+.biz-card .biz-icon {
+  color: #4F46E5; margin-bottom: 24px; transition: transform 0.5s;
+}
+.biz-card:hover .biz-icon { transform: scale(1.1); }
+.biz-card .biz-icon svg { width: 24px; height: 24px; }
+.biz-card h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+.biz-card p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+/* ====== TEAM ====== */
+.team-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; gap: 24px; flex-wrap: wrap; }
+.team-header h2 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 700; letter-spacing: -0.05em; }
+.team-header p { max-width: 28rem; color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 300; }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.team-card {
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;
+  padding: 32px; transition: border-color 0.2s;
+}
+.team-card:hover { border-color: rgba(79,70,229,0.5); }
+.team-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+.team-card h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
+.team-card .role {
+  font-size: 12px; font-family: "JetBrains Mono", monospace;
+  color: #4F46E5; text-transform: uppercase; letter-spacing: 0.15em;
+}
+.team-card .zap-icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.2); transition: color 0.2s;
+}
+.team-card:hover .zap-icon { color: #fff; }
+.team-card .zap-icon svg { width: 16px; height: 16px; }
+.team-card .team-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+/* ====== HISTORY ====== */
+.history-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; }
+.history-left h2 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.05em; margin-bottom: 24px; }
+.history-left p { color: rgba(255,255,255,0.4); font-size: 14px; line-height: 1.7; }
+.history-items { display: flex; flex-direction: column; gap: 48px; }
+.history-item { position: relative; padding-left: 48px; border-left: 1px solid rgba(255,255,255,0.1); }
+.history-dot {
+  position: absolute; left: -6px; top: 0;
+  width: 12px; height: 12px; background: #4F46E5; border-radius: 50%;
+  box-shadow: 0 0 15px rgba(79,70,229,0.5);
+}
+.history-item .year {
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  color: #4F46E5; margin-bottom: 8px; display: block;
+}
+.history-item h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+.history-item p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.7; }
+
+/* ====== FOOTER ====== */
+.footer { padding: 80px 24px; border-top: 1px solid rgba(255,255,255,0.05); background: #000; }
+.footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.footer-brand .logo-circle {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, #4F46E5, #9333EA);
+  display: inline-block; vertical-align: middle; margin-right: 8px;
+}
+.footer-brand .logo-text { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.05em; vertical-align: middle; }
+.footer-brand p { color: rgba(255,255,255,0.4); font-size: 14px; max-width: 28rem; line-height: 1.7; margin: 32px 0; }
+.footer-icons { display: flex; gap: 24px; color: rgba(255,255,255,0.4); }
+.footer-icons svg { width: 20px; height: 20px; cursor: pointer; transition: color 0.2s; }
+.footer-icons svg:hover { color: #fff; }
+.footer-form {
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 40px;
+}
+.footer-form h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.05em; margin-bottom: 24px; text-transform: uppercase; }
+.footer-form input, .footer-form textarea {
+  width: 100%; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+  padding: 16px 24px; font-size: 14px; color: #fff;
+  margin-bottom: 16px; outline: none; transition: border-color 0.2s; resize: none;
+}
+.footer-form input:focus, .footer-form textarea:focus { border-color: #4F46E5; }
+.footer-form input::placeholder, .footer-form textarea::placeholder { color: rgba(255,255,255,0.3); }
+.submit-btn {
+  width: 100%; padding: 16px; background: #fff; color: #000;
+  font-weight: 700; font-size: 12px; text-transform: uppercase;
+  letter-spacing: 0.15em; border: none; border-radius: 12px; transition: all 0.2s;
+}
+.submit-btn:hover { background: #4F46E5; color: #fff; }
+.footer-bottom {
+  max-width: 1280px; margin: 80px auto 0; padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px;
+  font-family: "JetBrains Mono", monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.2);
+}
+.footer-bottom a { transition: color 0.2s; }
+.footer-bottom a:hover { color: #fff; }
+.footer-bottom .links { display: flex; gap: 32px; }
+
+/* ====== NORY CITY MODAL ====== */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 100;
+  align-items: center; justify-content: center; padding: 24px;
+  background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 24px;
+  max-width: 896px; width: 100%; max-height: 80vh; overflow-y: auto;
+  padding: 48px; position: relative;
+}
+.modal-close {
+  position: absolute; top: 24px; right: 24px;
+  background: none; border: none; color: #fff; padding: 8px;
+  border-radius: 50%; transition: background 0.2s;
+}
+.modal-close:hover { background: rgba(255,255,255,0.1); }
+.modal-close svg { width: 24px; height: 24px; }
+.modal-content { display: flex; flex-direction: column; gap: 48px; }
+.modal-header { text-align: center; }
+.modal-header h2 { font-size: 3rem; font-weight: 700; letter-spacing: -0.05em; margin-bottom: 16px; }
+.modal-header p { color: #60A5FA; font-family: "JetBrains Mono", monospace; font-style: italic; }
+.modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.modal-body h3 { font-size: 1.25rem; font-weight: 700; padding-left: 16px; border-left: 4px solid #3B82F6; margin-bottom: 16px; }
+.modal-body p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.8; }
+.modal-features {
+  background: rgba(255,255,255,0.05); padding: 32px; border-radius: 16px;
+}
+.modal-features h3 { text-align: center; font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; border: none; padding: 0; }
+.features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+.features-grid .feat-label {
+  font-size: 10px; font-family: "JetBrains Mono", monospace;
+  color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 8px;
+}
+.features-grid .feat-value { font-size: 12px; font-weight: 700; }
+.modal-footer { text-align: center; }
+.modal-footer .quote { color: rgba(255,255,255,0.4); font-size: 14px; font-style: italic; margin-bottom: 32px; }
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .norycity-grid, .about-grid, .footer-inner { grid-template-columns: 1fr; }
+  .biz-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .history-grid { grid-template-columns: 1fr; }
+  .modal-body { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .hero-content .hero-logo { height: 80px; }
+  .nav-logo img { height: 28px; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .biz-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body class="grid-pattern">
+
+<!-- ====== NAVIGATION ====== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="https://ais-pre-676u5e2jkrxi2lvuyfxb2u-312485351974.asia-northeast1.run.app/screenshot-1743493231.png" alt="Birch Sound Logo">
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#about" data-ko="ABOUT" data-en="ABOUT">ABOUT</a>
+      <a href="#business" data-ko="BUSINESS" data-en="BUSINESS">BUSINESS</a>
+      <a href="#norycity" class="highlight" data-ko="NORY CITY" data-en="NORY CITY">NORY CITY</a>
+      <a href="#team" data-ko="TEAM" data-en="TEAM">TEAM</a>
+      <a href="#history" data-ko="HISTORY" data-en="HISTORY">HISTORY</a>
+    </div>
+    <div class="nav-right">
+      <button class="lang-btn" onclick="toggleLang()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+        <span id="lang-label">EN</span>
+      </button>
+      <a href="mailto:biz@birchsound.net" class="contact-btn" id="contact-nav-btn" data-ko="CONTACT" data-en="CONTACT">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<header class="hero" id="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=2000" alt="Festival Background">
+    <div class="hero-gradient"></div>
+  </div>
+  <div class="hero-content anim-up">
+    <img src="https://ais-pre-676u5e2jkrxi2lvuyfxb2u-312485351974.asia-northeast1.run.app/screenshot-1743493231.png" alt="Birch Sound Logo" class="hero-logo">
+    <h1 id="hero-title">NEXT GENERATION LIVE <br><span class="text-gradient">ENTERTAINMENT</span></h1>
+    <p id="hero-desc">버치사운드는 글로벌 뮤직페스티벌, 라이브 엔터테인먼트, 아티스트 협업, 전시, 크리에이티브 프로덕션, 미디어아트 경험을 기획·실행하는 공연 중심 콘텐츠 기업입니다.</p>
+  </div>
+</header>
+
+<!-- ====== NORY CITY ====== -->
+<div class="norycity" id="norycity">
+  <div class="norycity-bg">
+    <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&q=80&w=2000" alt="City Night">
+  </div>
+  <div class="section">
+    <div class="norycity-grid">
+      <div class="anim-left">
+        <span class="badge" id="nory-badge">RECENT PROJECT</span>
+        <h2 class="norycity-title">NORY CITY <br><span style="color:#60A5FA;">노리시티</span></h2>
+        <p class="norycity-catchphrase">"Breathe myself."</p>
+        <p class="norycity-def" id="nory-def">음악으로 비우고, 채우고, 나누는 도시</p>
+        <div class="norycity-btns">
+          <button class="btn-blue" onclick="openNoryModal()" id="nory-learn-btn">
+            <span data-ko="LEARN MORE" data-en="LEARN MORE">LEARN MORE</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+          <a href="https://www.norycity.com" target="_blank" rel="noopener noreferrer" class="btn-outline" id="nory-visit-btn">
+            <span data-ko="VISIT OFFICIAL SITE" data-en="VISIT OFFICIAL SITE">VISIT OFFICIAL SITE</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="norycity-images">
+        <div class="grid2">
+          <div class="col">
+            <div class="nory-img tall"><img src="https://images.unsplash.com/photo-1514525253361-bee8a187499b?auto=format&fit=crop&q=80&w=500" alt="Festival 1"></div>
+            <div class="nory-img sq"><img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=500" alt="Festival 2"></div>
+          </div>
+          <div class="col">
+            <div class="nory-img sq"><img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=500" alt="Festival 3"></div>
+            <div class="nory-img tall"><img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&q=80&w=500" alt="Festival 4"></div>
+          </div>
+        </div>
+        <div class="norycity-glow"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== ABOUT ====== -->
+<div class="section-border" id="about">
+  <div class="section">
+    <div class="about-grid">
+      <div>
+        <span class="badge" id="about-badge" data-ko="COMPANY OVERVIEW" data-en="COMPANY OVERVIEW">COMPANY OVERVIEW</span>
+        <h2 id="about-title" data-ko="CONNECTING ARTISTS, BRANDS, AND FANDOMS" data-en="CONNECTING ARTISTS, BRANDS, AND FANDOMS">CONNECTING ARTISTS, BRANDS, AND FANDOMS</h2>
+        <p class="desc" id="about-desc">버치사운드는 글로벌 뮤직페스티벌, 라이브 엔터테인먼트, 아티스트 협업, 전시, 크리에이티브 프로덕션, 미디어아트 경험을 기획·실행하는 공연 중심 콘텐츠 기업입니다. 글로벌 투어링, 아티스트 부킹, 공연 운영, 전시 기획, 생성형 AI 기반 비주얼 프로덕션 역량을 결합해 동시대 라이브 프로젝트를 개발합니다.</p>
+        <div class="vm-grid">
+          <div>
+            <h4 class="font-mono vision" id="vm-vision-label" data-ko="VISION" data-en="VISION">VISION</h4>
+            <p id="vm-vision-desc">아시아를 중심으로 글로벌 아티스트와 팬덤을 연결하는 차세대 플랫폼 구축.</p>
+          </div>
+          <div>
+            <h4 class="font-mono mission" id="vm-mission-label" data-ko="MISSION" data-en="MISSION">MISSION</h4>
+            <p id="vm-mission-desc">공연과 전시를 지속 가능한 문화 경험이자 확장 가능한 콘텐츠 자산으로 구현.</p>
+          </div>
+        </div>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80&w=1000" alt="Crowd" class="grayscale grayscale-hover">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== BUSINESS ====== -->
+<div class="section-bg" id="business">
+  <div class="section">
+    <div class="biz-header">
+      <span class="badge" id="biz-badge" data-ko="CORE BUSINESS" data-en="CORE BUSINESS">CORE BUSINESS</span>
+      <h2 id="biz-title" data-ko="OUR EXPERTISE" data-en="OUR EXPERTISE">OUR EXPERTISE</h2>
+    </div>
+    <div class="biz-grid" id="biz-grid">
+      <div class="biz-card">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <h3 id="biz-0-title">라이브 엔터테인먼트 & 투어링</h3>
+        <p id="biz-0-desc">글로벌 아티스트 공연, K-pop 투어, 페스티벌 기획 및 운영.</p>
+      </div>
+      <div class="biz-card">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3 id="biz-1-title">아티스트 부킹 & A&R</h3>
+        <p id="biz-1-desc">국내외 아티스트 부킹, 캐스팅, 브랜드 연계 협업.</p>
+      </div>
+      <div class="biz-card">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3 id="biz-2-title">전시 & 몰입형 경험</h3>
+        <p id="biz-2-desc">전시, 공간형 콘텐츠, 몰입형 미디어아트 기획.</p>
+      </div>
+      <div class="biz-card">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2Z"/></svg></div>
+        <h3 id="biz-3-title">크리에이티브 디렉션</h3>
+        <p id="biz-3-desc">공연 콘셉트, 무대 비주얼, 생성형 AI 기반 영상 설계.</p>
+      </div>
+      <div class="biz-card">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 0 3 3l1.5-1.5"/><path d="m18 11-3-3"/><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/></svg></div>
+        <h3 id="biz-4-title">전략적 파트너십</h3>
+        <p id="biz-4-desc">브랜드 협업, 국제 협력, 신규 시장 개발 전략.</p>
+      </div>
+      <div class="biz-card">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+        <h3 id="biz-5-title">콘텐츠 & 플랫폼 확장</h3>
+        <p id="biz-5-desc">공연과 전시를 디지털 콘텐츠 및 플랫폼으로 연결.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== TEAM ====== -->
+<div id="team">
+  <div class="section">
+    <div class="team-header">
+      <div>
+        <span class="badge" id="team-badge" data-ko="LEADERSHIP & TEAM" data-en="LEADERSHIP & TEAM">LEADERSHIP & TEAM</span>
+        <h2 id="team-title" data-ko="CORE COLLECTIVE" data-en="CORE COLLECTIVE">CORE COLLECTIVE</h2>
+      </div>
+      <p id="team-desc">글로벌 공연 산업의 핵심 기능을 수행해온 실무자들이 결집한 프로젝트 기반 조직입니다.</p>
+    </div>
+    <div class="team-grid" id="team-grid">
+      <div class="team-card">
+        <div class="team-card-top">
+          <div><h3>Hansu Kim</h3><p class="role">CEO</p></div>
+          <div class="zap-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        </div>
+        <p class="team-desc" id="team-0-desc">SBS 미디어홀딩스, CJ 그룹 출신. 미디어 전략 및 글로벌 사업 리더.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-top">
+          <div><h3>Philip Lee</h3><p class="role">CBO</p></div>
+          <div class="zap-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        </div>
+        <p class="team-desc" id="team-1-desc">글로벌 네트워크 기반 신규 사업 기획 및 전략적 파트너십 총괄.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-top">
+          <div><h3>Kei</h3><p class="role">Platform Executive</p></div>
+          <div class="zap-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        </div>
+        <p class="team-desc" id="team-2-desc">아시아 시장 아티스트 부킹 및 A&R 전문가.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-top">
+          <div><h3>Shirly</h3><p class="role">Global Touring</p></div>
+          <div class="zap-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        </div>
+        <p class="team-desc" id="team-3-desc">25년 경력, 500회 이상의 글로벌 라이브 이벤트 실적 보유.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-top">
+          <div><h3>Sunny</h3><p class="role">Creative Director</p></div>
+          <div class="zap-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        </div>
+        <p class="team-desc" id="team-4-desc">생성형 AI 및 미디어아트 기반 몰입형 전시 전문가.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-top">
+          <div><h3>Sumi</h3><p class="role">Partnership Manager</p></div>
+          <div class="zap-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        </div>
+        <p class="team-desc" id="team-5-desc">15년 이상의 전략적 제휴 및 글로벌 시장 확장 전문가.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== HISTORY ====== -->
+<div class="section-bg" id="history">
+  <div class="section">
+    <div class="history-grid">
+      <div class="history-left">
+        <span class="badge" id="history-badge" data-ko="HISTORY" data-en="HISTORY">HISTORY</span>
+        <h2 id="history-title" data-ko="EVOLUTION" data-en="EVOLUTION">EVOLUTION</h2>
+        <p id="history-left-desc">AKATV에서 버치사운드까지, 우리의 여정은 콘텐츠 혁신과 글로벌 확장으로 정의됩니다.</p>
+      </div>
+      <div class="history-items">
+        <div class="history-item">
+          <div class="history-dot"></div>
+          <span class="year">2025–Present</span>
+          <h3 id="hist-0-title">BIRCH SOUND Brand Launch</h3>
+          <p id="hist-0-desc">글로벌 라이브 엔터테인먼트, AI 프로덕션, 몰입형 전시 사업 확장.</p>
+        </div>
+        <div class="history-item">
+          <div class="history-dot"></div>
+          <span class="year">2017–2024</span>
+          <h3 id="hist-1-title">Content Business Era</h3>
+          <p id="hist-1-desc">프로듀스 101 시즌2, 내 사람친구의 연애 등 글로벌 마케팅 프로젝트 수행.</p>
+        </div>
+        <div class="history-item">
+          <div class="history-dot"></div>
+          <span class="year">2015–2017</span>
+          <h3 id="hist-2-title">Foundation & Web Original</h3>
+          <p id="hist-2-desc">AKATV 설립 및 멀티플랫폼 콘텐츠 유통 기반 구축.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:32px;">
+        <div class="logo-circle"></div>
+        <span class="logo-text">BIRCH SOUND</span>
+      </div>
+      <p id="footer-desc">아티스트, 무대, 전시, 도시, 브랜드, 팬 경험을 하나의 프로젝트 안에서 통합 설계하며, 아시아와 글로벌 시장을 연결하는 새로운 문화 플랫폼을 만들어갑니다.</p>
+      <div class="footer-icons">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      </div>
+    </div>
+    <div class="footer-form">
+      <h3 id="contact-title" data-ko="READY TO COLLABORATE?" data-en="READY TO COLLABORATE?">READY TO COLLABORATE?</h3>
+      <form action="mailto:biz@birchsound.net" method="post" enctype="text/plain">
+        <input type="email" name="email" id="contact-email" placeholder="EMAIL ADDRESS" data-ko-ph="EMAIL ADDRESS" data-en-ph="EMAIL ADDRESS">
+        <textarea name="message" rows="4" id="contact-msg" placeholder="TELL US ABOUT YOUR PROJECT" data-ko-ph="TELL US ABOUT YOUR PROJECT" data-en-ph="TELL US ABOUT YOUR PROJECT"></textarea>
+        <button type="submit" class="submit-btn" id="contact-send" data-ko="SEND MESSAGE" data-en="SEND MESSAGE">SEND MESSAGE</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom" style="padding: 0 24px;">
+    <p>&copy; 2026 BIRCH SOUND. ALL RIGHTS RESERVED.</p>
+    <div class="links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== NORY CITY MODAL ====== -->
+<div class="modal-overlay" id="nory-modal">
+  <div class="modal-box anim-scale">
+    <button class="modal-close" onclick="closeNoryModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="badge">Project Introduction</span>
+        <h2>NORY CITY</h2>
+        <p>"Breathe myself."</p>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h3>노리시티는 어디에 있는가</h3>
+          <p>지도에는 없다. 노리시티는 특정 도시에 속하지 않는다. 페스티벌이 열리는 순간, 그 도시에 나타난다. 밤이 되면 더 선명해진다. 저마다 다른 색으로 빛나는 창문들이 모여 하나의 도시를 이룬다. 페스티벌이 끝나면 노리시티는 사라진다. 그래서 사람들은 노리시티를 찾아다닌다.</p>
+        </div>
+        <div>
+          <h3>노리시티는 무엇을 하는 곳인가</h3>
+          <p>일상의 무게를 내려놓는 것. 음악이 그걸 가져간다. 그리고 채우는 것. 다시 살아갈 에너지를. 그리고 나누는 것. 언어가 달라도 같은 음악 앞에서 같은 감정을 느끼는 순간 — 그게 나눔이다.</p>
+        </div>
+      </div>
+      <div class="modal-features">
+        <h3>CORE IP FEATURES</h3>
+        <div class="features-grid">
+          <div>
+            <p class="feat-label font-mono">Format</p>
+            <p class="feat-value">Music + Art + AR/VR</p>
+          </div>
+          <div>
+            <p class="feat-label font-mono">Expansion</p>
+            <p class="feat-value">Virtual NORY CITY</p>
+          </div>
+          <div>
+            <p class="feat-label font-mono">Visual</p>
+            <p class="feat-value">Deep Navy + Neon</p>
+          </div>
+          <div>
+            <p class="feat-label font-mono">Cycle</p>
+            <p class="feat-value">Annual Festival</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p class="quote">"매년 다르다. 같은 노리시티는 두 번 다시 없다."</p>
+        <a href="https://www.norycity.com" target="_blank" rel="noopener noreferrer" class="btn-blue" style="display:inline-flex;">
+          Visit Official Website
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ====== LANGUAGE TOGGLE ======
+let currentLang = 'ko';
+
+const langData = {
+  ko: {
+    'hero-desc': '버치사운드는 글로벌 뮤직페스티벌, 라이브 엔터테인먼트, 아티스트 협업, 전시, 크리에이티브 프로덕션, 미디어아트 경험을 기획·실행하는 공연 중심 콘텐츠 기업입니다.',
+    'nory-def': '음악으로 비우고, 채우고, 나누는 도시',
+    'about-desc': '버치사운드는 글로벌 뮤직페스티벌, 라이브 엔터테인먼트, 아티스트 협업, 전시, 크리에이티브 프로덕션, 미디어아트 경험을 기획·실행하는 공연 중심 콘텐츠 기업입니다. 글로벌 투어링, 아티스트 부킹, 공연 운영, 전시 기획, 생성형 AI 기반 비주얼 프로덕션 역량을 결합해 동시대 라이브 프로젝트를 개발합니다.',
+    'vm-vision-desc': '아시아를 중심으로 글로벌 아티스트와 팬덤을 연결하는 차세대 플랫폼 구축.',
+    'vm-mission-desc': '공연과 전시를 지속 가능한 문화 경험이자 확장 가능한 콘텐츠 자산으로 구현.',
+    'biz-0-title': '라이브 엔터테인먼트 & 투어링', 'biz-0-desc': '글로벌 아티스트 공연, K-pop 투어, 페스티벌 기획 및 운영.',
+    'biz-1-title': '아티스트 부킹 & A&R', 'biz-1-desc': '국내외 아티스트 부킹, 캐스팅, 브랜드 연계 협업.',
+    'biz-2-title': '전시 & 몰입형 경험', 'biz-2-desc': '전시, 공간형 콘텐츠, 몰입형 미디어아트 기획.',
+    'biz-3-title': '크리에이티브 디렉션', 'biz-3-desc': '공연 콘셉트, 무대 비주얼, 생성형 AI 기반 영상 설계.',
+    'biz-4-title': '전략적 파트너십', 'biz-4-desc': '브랜드 협업, 국제 협력, 신규 시장 개발 전략.',
+    'biz-5-title': '콘텐츠 & 플랫폼 확장', 'biz-5-desc': '공연과 전시를 디지털 콘텐츠 및 플랫폼으로 연결.',
+    'team-desc': '글로벌 공연 산업의 핵심 기능을 수행해온 실무자들이 결집한 프로젝트 기반 조직입니다.',
+    'team-0-desc': 'SBS 미디어홀딩스, CJ 그룹 출신. 미디어 전략 및 글로벌 사업 리더.',
+    'team-1-desc': '글로벌 네트워크 기반 신규 사업 기획 및 전략적 파트너십 총괄.',
+    'team-2-desc': '아시아 시장 아티스트 부킹 및 A&R 전문가.',
+    'team-3-desc': '25년 경력, 500회 이상의 글로벌 라이브 이벤트 실적 보유.',
+    'team-4-desc': '생성형 AI 및 미디어아트 기반 몰입형 전시 전문가.',
+    'team-5-desc': '15년 이상의 전략적 제휴 및 글로벌 시장 확장 전문가.',
+    'history-left-desc': 'AKATV에서 버치사운드까지, 우리의 여정은 콘텐츠 혁신과 글로벌 확장으로 정의됩니다.',
+    'hist-0-desc': '글로벌 라이브 엔터테인먼트, AI 프로덕션, 몰입형 전시 사업 확장.',
+    'hist-1-desc': '프로듀스 101 시즌2, 내 사람친구의 연애 등 글로벌 마케팅 프로젝트 수행.',
+    'hist-2-desc': 'AKATV 설립 및 멀티플랫폼 콘텐츠 유통 기반 구축.',
+    'footer-desc': '아티스트, 무대, 전시, 도시, 브랜드, 팬 경험을 하나의 프로젝트 안에서 통합 설계하며, 아시아와 글로벌 시장을 연결하는 새로운 문화 플랫폼을 만들어갑니다.',
+  },
+  en: {
+    'hero-desc': 'Birch Sound is a live entertainment and creative production company developing global touring projects, artist collaborations, and immersive visual experiences.',
+    'nory-def': 'A city that empties, fills, and shares through music',
+    'about-desc': 'Birch Sound is a live entertainment and creative production company developing global touring projects, artist collaborations, exhibitions, and immersive visual experiences. We combine global touring, artist booking, and generative AI-based visual production to develop contemporary live projects.',
+    'vm-vision-desc': 'Building a next-generation platform connecting global artists and fandoms, centered in Asia.',
+    'vm-mission-desc': 'Transforming performances and exhibitions into sustainable cultural experiences and scalable content assets.',
+    'biz-0-title': 'Live Entertainment & Touring', 'biz-0-desc': 'Global artist performances, K-pop tours, and festival planning.',
+    'biz-1-title': 'Artist Booking & A&R', 'biz-1-desc': 'Domestic/International artist booking, casting, and brand collabs.',
+    'biz-2-title': 'Exhibition & Immersive Experiences', 'biz-2-desc': 'Exhibitions, space-based content, and immersive media art.',
+    'biz-3-title': 'Creative Direction', 'biz-3-desc': 'Stage visuals, media art, and Generative AI-based design.',
+    'biz-4-title': 'Strategic Partnerships', 'biz-4-desc': 'Brand collaborations, international alliances, and market growth.',
+    'biz-5-title': 'Content & Platform Extension', 'biz-5-desc': 'Connecting live events to digital content and platforms.',
+    'team-desc': 'A project-based organization of experts who have performed core functions in the global performance industry.',
+    'team-0-desc': 'Ex-SBS Media Holdings, CJ Group. Media strategy & global business leader.',
+    'team-1-desc': 'Global network expert driving business growth and strategic partnerships.',
+    'team-2-desc': 'A&R and International booking specialist for Asian markets.',
+    'team-3-desc': '25+ years experience, 500+ live events and world tours.',
+    'team-4-desc': 'Generative AI and media art specialist for immersive experiences.',
+    'team-5-desc': '15+ years in strategic alliances and market expansion.',
+    'history-left-desc': 'From AKATV to BIRCH SOUND, our journey has been defined by content innovation and global expansion.',
+    'hist-0-desc': 'Expansion into global live entertainment, AI production, and immersive exhibitions.',
+    'hist-1-desc': 'Produced Produce 101 S2, My Person\'s Love, and global marketing projects.',
+    'hist-2-desc': 'AKATV establishment and multi-platform content distribution.',
+    'footer-desc': 'Connecting artists, stages, cities, brands, and fan experiences within a single integrated project. Creating a new cultural platform that connects Asia and the global market.',
+  }
+};
+
+function toggleLang() {
+  currentLang = currentLang === 'ko' ? 'en' : 'ko';
+  document.getElementById('lang-label').textContent = currentLang === 'ko' ? 'EN' : 'KO';
+  document.documentElement.lang = currentLang;
+
+  // Update text content by ID
+  const data = langData[currentLang];
+  for (const [id, text] of Object.entries(data)) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  // Update elements with data-ko / data-en attributes
+  document.querySelectorAll('[data-ko]').forEach(el => {
+    el.textContent = el.getAttribute('data-' + currentLang);
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-ko-ph]').forEach(el => {
+    el.placeholder = el.getAttribute('data-' + currentLang + '-ph');
+  });
+}
+
+// ====== NORY CITY MODAL ======
+function openNoryModal() {
+  document.getElementById('nory-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeNoryModal() {
+  document.getElementById('nory-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('nory-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeNoryModal();
+});
+
+// ====== SCROLL ANIMATIONS (IntersectionObserver) ======
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.section, .biz-card, .team-card, .history-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+
+// ====== SMOOTH NAV SCROLL ======
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
