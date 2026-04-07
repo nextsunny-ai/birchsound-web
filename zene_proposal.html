@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ZENE THE ZILLA × BIRCH SOUND — Collaboration Proposal</title>
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,17 +26,16 @@
     background: var(--bg);
     color: var(--text);
     font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 16px;
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
   }
-  /* HERO */
   .hero {
     position: relative;
     padding: 80px 60px 72px;
     border-bottom: 1px solid var(--border-green);
     overflow: hidden;
-    min-height: 340px;
+    min-height: 320px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -51,58 +49,47 @@
     background: radial-gradient(circle, #1e4d1e 0%, transparent 65%);
     pointer-events: none;
   }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: 30%;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #0f2a0f 0%, transparent 70%);
-    pointer-events: none;
-  }
   .tag {
     display: inline-block;
-    font-size: 10px;
-    letter-spacing: 0.16em;
+    font-size: 12px;
+    letter-spacing: 0.14em;
     color: var(--green);
     border: 1px solid var(--green-dim);
-    padding: 4px 14px;
+    padding: 5px 16px;
     border-radius: 2px;
     margin-bottom: 28px;
     text-transform: uppercase;
     position: relative; z-index: 1;
   }
   .hero h1 {
-    font-size: clamp(32px, 5vw, 52px);
+    font-size: clamp(36px, 6vw, 60px);
     font-weight: 800;
     line-height: 1.1;
     color: #fff;
     letter-spacing: -0.03em;
     position: relative; z-index: 1;
-    margin-bottom: 6px;
   }
   .hero h1 .green { color: var(--green); }
   .hero-sub {
-    font-size: 13px;
+    font-size: 15px;
     color: var(--text-dim);
-    margin-top: 20px;
+    margin-top: 22px;
     letter-spacing: 0.02em;
     position: relative; z-index: 1;
   }
-  /* SECTIONS */
   .section {
-    padding: 56px 60px;
+    padding: 60px;
     border-bottom: 1px solid var(--border);
   }
   .section-label {
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.16em;
     color: var(--green);
     text-transform: uppercase;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
   .section-label::after {
     content: '';
@@ -110,24 +97,23 @@
     height: 1px;
     background: var(--border-green);
   }
-  /* CONCEPT */
   .concept-box {
     background: var(--bg-card);
     border: 1px solid var(--border-green);
     border-left: 3px solid var(--green);
-    padding: 36px;
+    padding: 40px;
     border-radius: 4px;
     margin-bottom: 16px;
   }
   .concept-title {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 700;
     color: #fff;
     letter-spacing: -0.02em;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
   .concept-desc {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--text-muted);
     line-height: 2;
   }
@@ -135,168 +121,174 @@
   .tech-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 24px;
+    gap: 10px;
+    margin-top: 28px;
   }
   .tech-tag {
-    font-size: 11px;
-    padding: 5px 14px;
+    font-size: 13px;
+    padding: 6px 16px;
     border: 1px solid var(--green-dim);
     color: var(--green);
     border-radius: 2px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
   }
   .note-small {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-faint);
     margin-top: 14px;
     padding-left: 2px;
   }
-  /* INFO ROW */
   .info-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 28px;
   }
   .info-item .i-label {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--green);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   .info-item .i-value {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--text);
-    line-height: 1.65;
+    line-height: 1.7;
   }
-  /* BIRCH */
   .birch-card {
     background: var(--bg-card);
     border: 1px solid var(--border-green);
-    padding: 32px;
+    padding: 36px;
     border-radius: 4px;
     margin-bottom: 20px;
   }
   .birch-card .b-name {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     letter-spacing: -0.01em;
   }
   .birch-card .b-sub {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--green);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
   .birch-card .b-desc {
-    font-size: 13px;
+    font-size: 15px;
     color: var(--text-muted);
-    line-height: 1.9;
+    line-height: 2;
   }
   .birch-card .b-desc em { color: #ccc; font-style: normal; }
   .strength-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 12px;
-    margin-top: 20px;
+    margin-top: 24px;
   }
   .s-item {
     background: var(--bg-dark);
     border: 1px solid #1e2e1e;
-    padding: 14px 16px;
+    padding: 16px 18px;
     border-radius: 4px;
   }
   .s-item .s-label {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--green);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   .s-item .s-val {
-    font-size: 12px;
+    font-size: 13px;
     color: #aaa;
-    line-height: 1.65;
+    line-height: 1.7;
   }
-  /* TEAM */
   .team-note {
     background: var(--bg-card);
     border: 1px solid var(--border-green);
     border-left: 3px solid var(--green);
-    padding: 18px 22px;
+    padding: 20px 26px;
     border-radius: 4px;
-    margin-bottom: 20px;
-    font-size: 13px;
+    margin-bottom: 24px;
+    font-size: 15px;
     color: var(--text-muted);
-    line-height: 1.8;
+    line-height: 1.9;
   }
   .team-note em { color: var(--green); font-style: normal; }
   .team-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 16px;
   }
   .team-card {
     background: var(--bg-card);
     border: 1px solid #1e1e1e;
-    padding: 22px;
+    padding: 26px;
     border-radius: 4px;
   }
   .team-card .t-name {
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
   .team-card .t-role {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--green);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 14px;
-    padding-bottom: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
     border-bottom: 1px solid #1e1e1e;
   }
   .team-card .t-career {
-    font-size: 12px;
+    font-size: 14px;
     color: #777;
-    line-height: 1.8;
+    line-height: 1.9;
   }
   .team-card .t-career span { color: #bbb; }
-  /* BOTTOM */
   .bottom {
-    padding: 56px 60px;
+    padding: 60px;
     background: var(--bg-dark);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 24px;
     text-align: center;
   }
   .bottom-note {
-    font-size: 13px;
+    font-size: 15px;
     color: #555;
-    line-height: 1.9;
+    line-height: 2;
   }
   .bottom-note em { color: var(--green); font-style: normal; }
-  .logo-area img {
-    height: 52px;
-    width: auto;
-    display: block;
-    opacity: 0.8;
+  .bottom-brand {
+    font-size: 13px;
+    color: #333;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
-  /* RESPONSIVE */
+
   @media (max-width: 768px) {
     .hero { padding: 56px 28px 48px; }
-    .section { padding: 40px 28px; }
-    .bottom { padding: 40px 28px; }
+    .section { padding: 48px 28px; }
+    .bottom { padding: 48px 28px; }
+    .concept-box { padding: 28px 24px; }
+    .concept-title { font-size: 22px; }
+    .birch-card { padding: 28px 24px; }
     .team-grid { grid-template-columns: 1fr; }
-    .concept-box { padding: 24px; }
-    .birch-card { padding: 24px; }
+    .team-card { padding: 22px 20px; }
+    .info-row { grid-template-columns: 1fr 1fr; }
+    .strength-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    body { font-size: 15px; }
+    .hero h1 { font-size: 32px; }
+    .info-row { grid-template-columns: 1fr; }
+    .concept-desc { font-size: 15px; }
   }
 </style>
 </head>
@@ -419,12 +411,11 @@
 
 <div class="bottom">
   <div class="bottom-note">
-    이번 프로젝트는 <em>ZENE THE ZILLA</em>의 신곡과 비주얼 세계관을 AI · XR 신기술로 새롭게 확장하는 작업입니다.<br>
+    이번 프로젝트는 <em>ZENE THE ZILLA</em>의 신곡과 비주얼 세계관을<br>
+    AI · XR 신기술로 새롭게 확장하는 작업입니다.<br>
     관심 있으시면 미팅을 제안드리겠습니다.
   </div>
-  <div class="logo-area">
-    <img src="버치사운드로고화이트PNG.png" alt="Birch Sound">
-  </div>
+  <div class="bottom-brand">Birch Sound — 2026</div>
 </div>
 
 </body>
