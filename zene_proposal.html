@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZENE THE ZILLA × BIRCH SOUND — Collaboration Proposal</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --green: #4caf50;
+    --green-dim: #2d5a2d;
+    --green-dark: #1a3a1a;
+    --bg: #0d0d0d;
+    --bg-dark: #0a0a0a;
+    --bg-card: #111111;
+    --text: #e8e8e8;
+    --text-muted: #999;
+    --text-dim: #666;
+    --text-faint: #444;
+    --border: #1a1a1a;
+    --border-green: #1e3a1e;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 80px 60px 72px;
+    border-bottom: 1px solid var(--border-green);
+    overflow: hidden;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1e4d1e 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 30%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #0f2a0f 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--green);
+    border: 1px solid var(--green-dim);
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -0.03em;
+    position: relative; z-index: 1;
+    margin-bottom: 6px;
+  }
+  .hero h1 .green { color: var(--green); }
+  .hero-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 20px;
+    letter-spacing: 0.02em;
+    position: relative; z-index: 1;
+  }
+  /* SECTIONS */
+  .section {
+    padding: 56px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-green);
+  }
+  /* CONCEPT */
+  .concept-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-green);
+    border-left: 3px solid var(--green);
+    padding: 36px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  .concept-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+  .concept-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 2;
+  }
+  .concept-desc em { color: var(--green); font-style: normal; }
+  .tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .tech-tag {
+    font-size: 11px;
+    padding: 5px 14px;
+    border: 1px solid var(--green-dim);
+    color: var(--green);
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+  .note-small {
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-top: 14px;
+    padding-left: 2px;
+  }
+  /* INFO ROW */
+  .info-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 24px;
+  }
+  .info-item .i-label {
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .info-item .i-value {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+  /* BIRCH */
+  .birch-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-green);
+    padding: 32px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  .birch-card .b-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .birch-card .b-sub {
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .birch-card .b-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .birch-card .b-desc em { color: #ccc; font-style: normal; }
+  .strength-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .s-item {
+    background: var(--bg-dark);
+    border: 1px solid #1e2e1e;
+    padding: 14px 16px;
+    border-radius: 4px;
+  }
+  .s-item .s-label {
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .s-item .s-val {
+    font-size: 12px;
+    color: #aaa;
+    line-height: 1.65;
+  }
+  /* TEAM */
+  .team-note {
+    background: var(--bg-card);
+    border: 1px solid var(--border-green);
+    border-left: 3px solid var(--green);
+    padding: 18px 22px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  .team-note em { color: var(--green); font-style: normal; }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .team-card {
+    background: var(--bg-card);
+    border: 1px solid #1e1e1e;
+    padding: 22px;
+    border-radius: 4px;
+  }
+  .team-card .t-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .team-card .t-role {
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .team-card .t-career {
+    font-size: 12px;
+    color: #777;
+    line-height: 1.8;
+  }
+  .team-card .t-career span { color: #bbb; }
+  /* BOTTOM */
+  .bottom {
+    padding: 56px 60px;
+    background: var(--bg-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    text-align: center;
+  }
+  .bottom-note {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.9;
+  }
+  .bottom-note em { color: var(--green); font-style: normal; }
+  .logo-area img {
+    height: 52px;
+    width: auto;
+    display: block;
+    opacity: 0.8;
+  }
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { padding: 56px 28px 48px; }
+    .section { padding: 40px 28px; }
+    .bottom { padding: 40px 28px; }
+    .team-grid { grid-template-columns: 1fr; }
+    .concept-box { padding: 24px; }
+    .birch-card { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="tag">Collaboration Proposal · 2026</div>
+  <h1>ZENE THE ZILLA<br>× <span class="green">BIRCH SOUND</span></h1>
+  <div class="hero-sub">신기술 융합 음악콘텐츠 / AI · XR 뮤직비디오 프로젝트</div>
+</div>
+
+<div class="section">
+  <div class="section-label">Creative Concept</div>
+  <div class="concept-box">
+    <div class="concept-title">Real × Virtual — 두 개의 질라</div>
+    <div class="concept-desc">
+      신곡 뮤직비디오를 기반으로, 현실의 ZENE THE ZILLA와 <em>AI가 생성한 버추얼 자신</em>이 XR 공간에서 만난다.<br><br>
+      실존 퍼포먼스를 AI가 학습해 만들어낸 디지털 캐릭터와 현실의 아티스트가 같은 프레임 안에 공존하는 구조. 미래 공간을 배경으로 두 존재가 충돌하고 대화하며 하나가 되는 서사.<br><br>
+      질라의 시그니처 비주얼과 에너지를 AI · XR 신기술로 완전히 새로운 차원으로 확장한다.
+    </div>
+    <div class="tech-list">
+      <span class="tech-tag">AI 버추얼 캐릭터</span>
+      <span class="tech-tag">XR 공간 합성</span>
+      <span class="tech-tag">AI 영상 생성</span>
+      <span class="tech-tag">오디오 리액티브 비주얼</span>
+    </div>
+  </div>
+  <div class="note-small">* 콘셉트는 아티스트와 충분히 조율 가능합니다</div>
+</div>
+
+<div class="section">
+  <div class="section-label">Project Overview</div>
+  <div class="info-row">
+    <div class="info-item">
+      <div class="i-label">사업</div>
+      <div class="i-value">한국콘텐츠진흥원<br>2026 신기술 융합<br>음악콘텐츠 개발 지원사업</div>
+    </div>
+    <div class="info-item">
+      <div class="i-label">기간</div>
+      <div class="i-value">2026년 6월 — 11월<br>결과물 공개 완료</div>
+    </div>
+    <div class="info-item">
+      <div class="i-label">형식</div>
+      <div class="i-value">신곡 뮤직비디오 /<br>퍼포먼스 클립</div>
+    </div>
+    <div class="info-item">
+      <div class="i-label">주관사</div>
+      <div class="i-value">버치사운드<br>Birch Sound</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">About Birch Sound</div>
+  <div class="birch-card">
+    <div class="b-name">Birch Sound</div>
+    <div class="b-sub">Live Entertainment · Creative Production</div>
+    <div class="b-desc">
+      글로벌 라이브 엔터테인먼트, 아티스트 협업, 크리에이티브 프로덕션을 전문으로 하는 공연 중심 콘텐츠 기업.<br>
+      해외 아티스트 내한 공연, K-pop 아시아 투어, 몰입형 전시 등 <em>500회 이상의 라이브 이벤트 실적</em>을 보유하며, 글로벌 아티스트 네트워크와 AI 신기술 크리에이티브 역량을 결합한 프로젝트를 기획·실행한다.
+    </div>
+    <div class="strength-row">
+      <div class="s-item">
+        <div class="s-label">Live & Touring</div>
+        <div class="s-val">글로벌 아티스트 부킹 · K-pop 아시아 투어 · 500회+ 라이브</div>
+      </div>
+      <div class="s-item">
+        <div class="s-label">AI Creative</div>
+        <div class="s-val">AI 영상 · XR · 미디어아트 · 몰입형 전시 기획·제작</div>
+      </div>
+      <div class="s-item">
+        <div class="s-label">Partnership</div>
+        <div class="s-val">브랜드 협업 · 글로벌 파트너십 · 신규 시장 개발</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">AI & Tech Production Team</div>
+  <div class="team-note">
+    버치사운드 크리에이티브 팀은 <em>AI 영상 · XR · 미디어아트</em> 전문 프로듀서와 감독으로 구성된 신기술 프로덕션 팀입니다. 대형 국가 행사부터 글로벌 공연까지 AI 기반 비주얼을 실제로 구현해온 실전 경험을 보유합니다.
+  </div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="t-name">유희정</div>
+      <div class="t-role">AI Director · Creative Director</div>
+      <div class="t-career">
+        <span>에버랜드 50주년</span> 기념공연 CD<br>
+        <span>오징어게임 시즌3</span> 서울시 행사 총괄 CD<br>
+        <span>조선요괴전</span> IP 기획·총괄 디렉터<br>
+        AWE Asia 2023 Best Application Winner<br>
+        영화·드라마 VFX / 미디어아트·생성형 AI 전문
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="t-name">김태훈</div>
+      <div class="t-role">Director · VFX Supervisor</div>
+      <div class="t-career">
+        <span>APEC 정상회의</span> AI 영상 총연출<br>
+        <span>아이리스 · 포화속으로</span> VFX Supervisor<br>
+        영화 · 드라마 연출 / TD<br>
+        전 금강기획 아트디렉터<br>
+        <span>현대자동차 · 신세기통신</span> 광고기획
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="t-name">오훈</div>
+      <div class="t-role">Producer · A&R</div>
+      <div class="t-career">
+        <span>1N2 Music</span> 대표<br>
+        <span>2CS Production</span> 대표 (2007–2024)<br>
+        아티스트 부킹 · A&R · 국제 코디네이션<br>
+        <span>창모 · 제시</span> 등 아시아 투어 프로젝트<br>
+        중국 · 베트남 · 몽골 · 필리핀 해외 업무
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom">
+  <div class="bottom-note">
+    이번 프로젝트는 <em>ZENE THE ZILLA</em>의 신곡과 비주얼 세계관을 AI · XR 신기술로 새롭게 확장하는 작업입니다.<br>
+    관심 있으시면 미팅을 제안드리겠습니다.
+  </div>
+  <div class="logo-area">
+    <img src="버치사운드로고화이트PNG.png" alt="Birch Sound">
+  </div>
+</div>
+
+</body>
+</html>
