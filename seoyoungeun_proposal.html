@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서영은 × BIRCH SOUND — Collaboration Proposal</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #c9a86c;
+    --gold-dim: #5a4520;
+    --gold-dark: #2e200a;
+    --bg: #0e0c0a;
+    --bg-dark: #090807;
+    --bg-card: #131109;
+    --text: #ede8e0;
+    --text-muted: #9a9080;
+    --text-dim: #5a5040;
+    --text-faint: #3a3020;
+    --border: #1e1a12;
+    --border-gold: #3a2e18;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .hero {
+    position: relative;
+    padding: 80px 60px 72px;
+    border-bottom: 1px solid var(--border-gold);
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #3a2800 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 20%;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1e1400 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 5px 16px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -0.03em;
+    position: relative; z-index: 1;
+  }
+  .hero h1 .gold { color: var(--gold); }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-top: 22px;
+    letter-spacing: 0.02em;
+    position: relative; z-index: 1;
+  }
+  .section {
+    padding: 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-gold);
+  }
+  .concept-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-left: 3px solid var(--gold);
+    padding: 40px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  .concept-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .concept-desc {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 2;
+  }
+  .concept-desc em { color: var(--gold); font-style: normal; }
+  .tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .tech-tag {
+    font-size: 13px;
+    padding: 6px 16px;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    border-radius: 2px;
+    letter-spacing: 0.04em;
+  }
+  .note-small {
+    font-size: 13px;
+    color: var(--text-faint);
+    margin-top: 14px;
+    padding-left: 2px;
+  }
+  .info-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 28px;
+  }
+  .info-item .i-label {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .info-item .i-value {
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .birch-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    padding: 36px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  .birch-card .b-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .birch-card .b-sub {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .birch-card .b-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 2;
+  }
+  .birch-card .b-desc em { color: #ccc; font-style: normal; }
+  .strength-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .s-item {
+    background: var(--bg-dark);
+    border: 1px solid #2a2010;
+    padding: 16px 18px;
+    border-radius: 4px;
+  }
+  .s-item .s-label {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .s-item .s-val {
+    font-size: 13px;
+    color: #aaa;
+    line-height: 1.7;
+  }
+  .team-note {
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-left: 3px solid var(--gold);
+    padding: 20px 26px;
+    border-radius: 4px;
+    margin-bottom: 24px;
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .team-note em { color: var(--gold); font-style: normal; }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .team-card {
+    background: var(--bg-card);
+    border: 1px solid #1e1a12;
+    padding: 26px;
+    border-radius: 4px;
+  }
+  .team-card .t-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .team-card .t-role {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #1e1a12;
+  }
+  .team-card .t-career {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.9;
+  }
+  .team-card .t-career span { color: #bbb; }
+  .bottom {
+    padding: 60px;
+    background: var(--bg-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+  .bottom-note {
+    font-size: 15px;
+    color: #555;
+    line-height: 2;
+  }
+  .bottom-note em { color: var(--gold); font-style: normal; }
+  .bottom-brand {
+    font-size: 13px;
+    color: #333;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .hero { padding: 56px 28px 48px; }
+    .section { padding: 48px 28px; }
+    .bottom { padding: 48px 28px; }
+    .concept-box { padding: 28px 24px; }
+    .concept-title { font-size: 22px; }
+    .birch-card { padding: 28px 24px; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .info-row { grid-template-columns: 1fr 1fr; }
+    .strength-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    body { font-size: 15px; }
+    .hero h1 { font-size: 32px; }
+    .info-row { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+    .concept-desc { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="tag">Collaboration Proposal · 2026</div>
+  <h1>서영은<br>× <span class="gold">BIRCH SOUND</span></h1>
+  <div class="hero-sub">신기술 융합 음악콘텐츠 / AI · XR 뮤직비디오 프로젝트</div>
+</div>
+
+<div class="section">
+  <div class="section-label">Creative Concept</div>
+  <div class="concept-box">
+    <div class="concept-title">목소리만 남기고 모든 걸 바꾼다</div>
+    <div class="concept-desc">
+      서영은의 보컬은 그대로 — <em>AI가 완전히 다른 시공간의 비주얼 세계를 만들어낸다.</em><br><br>
+      시대도, 공간도, 장르의 무드도 전부 해체한다. 익숙한 목소리가 낯선 세계에 놓이는 순간, 관객은 새로운 감각으로 그 음악을 다시 듣게 된다.<br><br>
+      신곡을 기반으로, 서영은의 보컬 위에 AI 생성 비주얼과 XR 공간이 완전히 새로운 뮤직비디오를 완성한다.
+    </div>
+    <div class="tech-list">
+      <span class="tech-tag">AI 영상 생성</span>
+      <span class="tech-tag">XR 공간 합성</span>
+      <span class="tech-tag">AI 비주얼 월드빌딩</span>
+      <span class="tech-tag">오디오 리액티브 비주얼</span>
+    </div>
+  </div>
+  <div class="note-small">* 콘셉트는 아티스트와 충분히 조율 가능합니다</div>
+</div>
+
+<div class="section">
+  <div class="section-label">Project Overview</div>
+  <div class="info-row">
+    <div class="info-item">
+      <div class="i-label">사업</div>
+      <div class="i-value">한국콘텐츠진흥원<br>2026 신기술 융합<br>음악콘텐츠 개발 지원사업</div>
+    </div>
+    <div class="info-item">
+      <div class="i-label">기간</div>
+      <div class="i-value">2026년 6월 — 11월<br>결과물 공개 완료</div>
+    </div>
+    <div class="info-item">
+      <div class="i-label">형식</div>
+      <div class="i-value">신곡 뮤직비디오 /<br>퍼포먼스 클립</div>
+    </div>
+    <div class="info-item">
+      <div class="i-label">주관사</div>
+      <div class="i-value">버치사운드<br>Birch Sound</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">About Birch Sound</div>
+  <div class="birch-card">
+    <div class="b-name">Birch Sound</div>
+    <div class="b-sub">Live Entertainment · Creative Production</div>
+    <div class="b-desc">
+      글로벌 라이브 엔터테인먼트, 아티스트 협업, 크리에이티브 프로덕션을 전문으로 하는 공연 중심 콘텐츠 기업.<br>
+      해외 아티스트 내한 공연, K-pop 아시아 투어, 몰입형 전시 등 <em>500회 이상의 라이브 이벤트 실적</em>을 보유하며, 글로벌 아티스트 네트워크와 AI 신기술 크리에이티브 역량을 결합한 프로젝트를 기획·실행한다.
+    </div>
+    <div class="strength-row">
+      <div class="s-item">
+        <div class="s-label">Live & Touring</div>
+        <div class="s-val">글로벌 아티스트 부킹 · K-pop 아시아 투어 · 500회+ 라이브</div>
+      </div>
+      <div class="s-item">
+        <div class="s-label">AI Creative</div>
+        <div class="s-val">AI 영상 · XR · 미디어아트 · 몰입형 전시 기획·제작</div>
+      </div>
+      <div class="s-item">
+        <div class="s-label">Partnership</div>
+        <div class="s-val">브랜드 협업 · 글로벌 파트너십 · 신규 시장 개발</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">AI & Tech Production Team</div>
+  <div class="team-note">
+    버치사운드 크리에이티브 팀은 <em>AI 영상 · XR · 미디어아트</em> 전문 프로듀서와 감독으로 구성된 신기술 프로덕션 팀입니다. 대형 국가 행사부터 글로벌 공연까지 AI 기반 비주얼을 실제로 구현해온 실전 경험을 보유합니다.
+  </div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="t-name">김한수</div>
+      <div class="t-role">CEO</div>
+      <div class="t-career">
+        <span>SBS Media Holdings</span> 미디어 전략<br>
+        <span>CJ 그룹</span> 글로벌 콘텐츠 사업<br>
+        <span>코엔미디어</span> 신규 사업 개발<br>
+        채널 운영 · 플랫폼 · 해외사업 전문
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="t-name">유희정</div>
+      <div class="t-role">AI Director · CD</div>
+      <div class="t-career">
+        <span>에버랜드 50주년</span> 기념공연 CD<br>
+        <span>오징어게임 시즌3</span> 서울시 행사 총괄 CD<br>
+        <span>조선요괴전</span> IP 기획·총괄 디렉터<br>
+        AWE Asia 2023 Best Application Winner<br>
+        영화·드라마 VFX / 미디어아트·생성형 AI 전문
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="t-name">김태훈</div>
+      <div class="t-role">Director · VFX Supervisor</div>
+      <div class="t-career">
+        <span>APEC 정상회의</span> AI 영상 총연출<br>
+        <span>아이리스 · 포화속으로</span> VFX Supervisor<br>
+        영화 · 드라마 연출 / TD<br>
+        전 금강기획 아트디렉터<br>
+        <span>현대자동차 · 신세기통신</span> 광고기획
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="t-name">오훈</div>
+      <div class="t-role">Producer · A&R</div>
+      <div class="t-career">
+        <span>1N2 Music</span> 대표<br>
+        <span>2CS Production</span> 대표 (2007–2024)<br>
+        아티스트 부킹 · A&R · 국제 코디네이션<br>
+        <span>창모 · 제시</span> 등 아시아 투어 프로젝트<br>
+        중국 · 베트남 · 몽골 · 필리핀 해외 업무
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom">
+  <div class="bottom-note">
+    이번 프로젝트는 <em>서영은</em>의 음악과 보컬을<br>
+    AI · XR 신기술로 완전히 새로운 시각 언어로 재탄생시키는 작업입니다.<br>
+    관심 있으시면 미팅을 제안드리겠습니다.
+  </div>
+  <div class="bottom-brand">Birch Sound — 2026</div>
+</div>
+
+</body>
+</html>
