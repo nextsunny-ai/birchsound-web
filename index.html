@@ -121,16 +121,17 @@ input, textarea { font-family: inherit; }
   background: linear-gradient(to bottom, transparent, rgba(10,10,10,0.5) 50%, #0A0A0A);
 }
 .hero-content {
-  position: relative; z-index: 10; text-align: center; padding: 0 24px; max-width: 896px;
+  position: relative; z-index: 10; text-align: center; padding: 0 24px; max-width: 800px;
+  transform: scale(0.9); transform-origin: center center;
 }
-.hero-content .hero-logo { height: 128px; margin: 0 auto 32px; }
+.hero-content .hero-logo { height: 72px; max-width: 70%; margin: 0 auto 28px; object-fit: contain; }
 .hero-content h1 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700;
-  letter-spacing: -0.05em; line-height: 0.9; margin-bottom: 24px; text-transform: uppercase;
+  font-size: clamp(2.2rem, 5.4vw, 4rem); font-weight: 700;
+  letter-spacing: -0.05em; line-height: 0.9; margin-bottom: 20px; text-transform: uppercase;
 }
 .hero-content p {
-  font-size: clamp(1rem, 2vw, 1.25rem); color: rgba(255,255,255,0.6);
-  max-width: 672px; margin: 0 auto; font-weight: 300; line-height: 1.7;
+  font-size: clamp(0.9rem, 1.8vw, 1.125rem); color: rgba(255,255,255,0.6);
+  max-width: 600px; margin: 0 auto; font-weight: 300; line-height: 1.7;
 }
 
 /* ====== NORY CITY ====== */
@@ -355,7 +356,7 @@ input, textarea { font-family: inherit; }
   .history-grid { grid-template-columns: 1fr; }
   .modal-body { grid-template-columns: 1fr; }
   .features-grid { grid-template-columns: 1fr 1fr; }
-  .hero-content .hero-logo { height: 80px; }
+  .hero-content .hero-logo { height: 60px; }
   .nav-logo img { height: 28px; }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
