@@ -349,6 +349,7 @@ input, textarea { font-family: inherit; }
 /* ====== RESPONSIVE ====== */
 @media (max-width: 768px) {
   .nav-links { display: none; }
+  .section { padding: 64px 32px; }
   .norycity-grid, .about-grid, .footer-inner { grid-template-columns: 1fr; }
   .biz-grid { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: 1fr; }
@@ -356,7 +357,10 @@ input, textarea { font-family: inherit; }
   .modal-body { grid-template-columns: 1fr; }
   .features-grid { grid-template-columns: 1fr 1fr; }
   .hero-content .hero-logo { height: 60px; }
+  .hero-content { padding: 0 32px; }
   .nav-logo img { height: 28px; }
+  .footer { padding: 64px 32px; }
+  .footer-bottom { padding: 0 32px !important; }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
   .biz-grid { grid-template-columns: repeat(2, 1fr); }
