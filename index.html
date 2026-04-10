@@ -20,7 +20,7 @@ body {
   overflow-x: hidden;
   line-height: 1.6;
 }
-::selection { background: #4F46E5; color: #fff; }
+::selection { background: #0075EB; color: #fff; }
 a { text-decoration: none; color: inherit; }
 button { font-family: inherit; cursor: pointer; }
 img { display: block; max-width: 100%; }
@@ -29,7 +29,7 @@ input, textarea { font-family: inherit; }
 /* ====== UTILITIES ====== */
 .font-mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace; }
 .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); }
-.text-gradient { background: linear-gradient(to right, #4F46E5, #9333EA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.text-gradient { background: linear-gradient(to right, #0075EB, #0075EB); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .grid-pattern { background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0); background-size: 40px 40px; }
 .grayscale { filter: grayscale(100%); }
 .grayscale-hover:hover { filter: grayscale(0%); transition: filter 0.7s; }
@@ -70,7 +70,7 @@ input, textarea { font-family: inherit; }
   transition: color 0.2s;
 }
 .nav-links a:hover { color: #fff; }
-.nav-links a.highlight { color: #4F46E5; font-weight: 700; }
+.nav-links a.highlight { color: #0075EB; font-weight: 700; }
 .nav-right { display: flex; align-items: center; gap: 16px; }
 .lang-btn {
   display: flex; align-items: center; gap: 8px;
@@ -85,7 +85,7 @@ input, textarea { font-family: inherit; }
   font-size: 10px; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.15em; border: none; transition: all 0.2s;
 }
-.contact-btn:hover { background: #4F46E5; color: #fff; }
+.contact-btn:hover { background: #0075EB; color: #fff; }
 
 /* ====== BADGE ====== */
 .badge {
@@ -100,8 +100,8 @@ input, textarea { font-family: inherit; }
 .section {
   padding: 96px 24px; max-width: 1280px; margin: 0 auto;
 }
-.section-border { border-top: 1px solid rgba(79,70,229,0.15); }
-.section-bg { background: rgba(79,70,229,0.04); border-top: 1px solid rgba(79,70,229,0.12); border-bottom: 1px solid rgba(79,70,229,0.12); }
+.section-border { border-top: 1px solid rgba(0,117,235,0.15); }
+.section-bg { background: rgba(0,117,235,0.04); border-top: 1px solid rgba(0,117,235,0.12); border-bottom: 1px solid rgba(0,117,235,0.12); }
 
 /* ====== HERO ====== */
 .hero {
@@ -182,8 +182,8 @@ input, textarea { font-family: inherit; }
   font-family: "JetBrains Mono", monospace; font-size: 12px;
   text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px;
 }
-.vm-grid h4.vision { color: #4F46E5; }
-.vm-grid h4.mission { color: #9333EA; }
+.vm-grid h4.vision { color: #0075EB; }
+.vm-grid h4.mission { color: #0075EB; }
 .vm-grid p { font-size: 14px; color: rgba(255,255,255,0.8); }
 .about-image { position: relative; aspect-ratio: 1; }
 .about-image img {
@@ -201,11 +201,11 @@ input, textarea { font-family: inherit; }
   border: 1px solid rgba(255,255,255,0.1);
 }
 .biz-card {
-  background: rgba(255,255,255,0.04); padding: 40px; border: 1px solid rgba(79,70,229,0.1); transition: background 0.2s;
+  background: rgba(255,255,255,0.04); padding: 40px; border: 1px solid rgba(0,117,235,0.1); transition: background 0.2s;
 }
 .biz-card:hover { background: rgba(255,255,255,0.03); }
 .biz-card .biz-icon {
-  color: #4F46E5; margin-bottom: 24px; transition: transform 0.5s;
+  color: #0075EB; margin-bottom: 24px; transition: transform 0.5s;
 }
 .biz-card:hover .biz-icon { transform: scale(1.1); }
 .biz-card .biz-icon svg { width: 24px; height: 24px; }
@@ -222,12 +222,12 @@ input, textarea { font-family: inherit; }
   border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;
   padding: 32px; transition: border-color 0.2s;
 }
-.team-card:hover { border-color: rgba(79,70,229,0.5); }
+.team-card:hover { border-color: rgba(0,117,235,0.5); }
 .team-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
 .team-card h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
 .team-card .role {
   font-size: 12px; font-family: "JetBrains Mono", monospace;
-  color: #4F46E5; text-transform: uppercase; letter-spacing: 0.15em;
+  color: #0075EB; text-transform: uppercase; letter-spacing: 0.15em;
 }
 .team-card .zap-icon {
   width: 40px; height: 40px; border-radius: 50%;
@@ -247,12 +247,12 @@ input, textarea { font-family: inherit; }
 .history-item { position: relative; padding-left: 48px; border-left: 1px solid rgba(255,255,255,0.1); }
 .history-dot {
   position: absolute; left: -6px; top: 0;
-  width: 12px; height: 12px; background: #4F46E5; border-radius: 50%;
-  box-shadow: 0 0 15px rgba(79,70,229,0.5);
+  width: 12px; height: 12px; background: #0075EB; border-radius: 50%;
+  box-shadow: 0 0 15px rgba(0,117,235,0.5);
 }
 .history-item .year {
   font-family: "JetBrains Mono", monospace; font-size: 12px;
-  color: #4F46E5; margin-bottom: 8px; display: block;
+  color: #0075EB; margin-bottom: 8px; display: block;
 }
 .history-item h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
 .history-item p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.7; }
@@ -262,7 +262,7 @@ input, textarea { font-family: inherit; }
 .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
 .footer-brand .logo-circle {
   width: 40px; height: 40px; border-radius: 50%;
-  background: linear-gradient(135deg, #4F46E5, #9333EA);
+  background: linear-gradient(135deg, #0075EB, #0075EB);
   display: inline-block; vertical-align: middle; margin-right: 8px;
 }
 .footer-brand .logo-text { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.05em; vertical-align: middle; }
@@ -281,14 +281,14 @@ input, textarea { font-family: inherit; }
   padding: 16px 24px; font-size: 14px; color: #fff;
   margin-bottom: 16px; outline: none; transition: border-color 0.2s; resize: none;
 }
-.footer-form input:focus, .footer-form textarea:focus { border-color: #4F46E5; }
+.footer-form input:focus, .footer-form textarea:focus { border-color: #0075EB; }
 .footer-form input::placeholder, .footer-form textarea::placeholder { color: rgba(255,255,255,0.3); }
 .submit-btn {
   width: 100%; padding: 16px; background: #fff; color: #000;
   font-weight: 700; font-size: 12px; text-transform: uppercase;
   letter-spacing: 0.15em; border: none; border-radius: 12px; transition: all 0.2s;
 }
-.submit-btn:hover { background: #4F46E5; color: #fff; }
+.submit-btn:hover { background: #0075EB; color: #fff; }
 .footer-bottom {
   max-width: 1280px; margin: 80px auto 0; padding-top: 32px;
   border-top: 1px solid rgba(255,255,255,0.05);
@@ -505,7 +505,7 @@ input, textarea { font-family: inherit; }
 </div>
 
 <!-- ====== TEAM ====== -->
-<div id="team" style="background:rgba(79,70,229,0.03); border-top:1px solid rgba(79,70,229,0.1); border-bottom:1px solid rgba(79,70,229,0.1);">
+<div id="team" style="background:rgba(0,117,235,0.03); border-top:1px solid rgba(0,117,235,0.1); border-bottom:1px solid rgba(0,117,235,0.1);">
   <div class="section">
     <div class="team-header">
       <div>
